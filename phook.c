@@ -14,7 +14,7 @@
 #include <sys/time.h>
 
 #define PROGRAM_NAME "phook"
-#define PROGRAM_VERSION "0.01"
+#define PROGRAM_VERSION "0.03"
 
 static struct option const longopts[] = {{"help", no_argument, NULL, 0},
                                          {"version", no_argument, NULL, 1},
