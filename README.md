@@ -15,6 +15,17 @@ Mandatory arguments to long options are mandatory for short options too
       --version              output version information and exit
 ```
 
+## Installation
+
+You need macOS for this to work.
+
+```
+$ wget https://github.com/drinchev/phook/archive/v0.0.4.tar.gz
+$ tar -xzf v0.0.4.tar.gz
+$ cd phook-0.0.4
+$ make install
+```
+
 Credits goes to http://serverfault.com/a/641004/152846
 
 ---
