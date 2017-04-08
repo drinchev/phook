@@ -14,7 +14,9 @@
 #include <sys/time.h>
 
 #define PROGRAM_NAME "phook"
-#define PROGRAM_VERSION "0.03"
+#define PROGRAM_VERSION "0.04"
+
+const char *after = NULL;
 
 static struct option const longopts[] = {{"help", no_argument, NULL, 0},
                                          {"version", no_argument, NULL, 1},
@@ -55,9 +57,14 @@ void version() {
   exit(EXIT_SUCCESS);
 }
 
+void sigint_handler()
+{
+  system(after);
+  exit(EXIT_SUCCESS);
+}
+
 int main(int argc, char **argv) {
 
-  const char *after = NULL;
   const char *execute = NULL;
   int acode = 0;
   int ecode = 0;
@@ -67,6 +74,8 @@ int main(int argc, char **argv) {
   int kq;
   int kret;
   struct timespec timeout;
+
+  signal(SIGINT, sigint_handler);
 
   while ((optc = getopt_long(argc, argv, "a:e:", longopts, NULL)) != -1) {
     switch (optc) {
@@ -91,7 +100,7 @@ int main(int argc, char **argv) {
     ecode = system(execute);
 
   if ( ecode > 0 )
-    exit( EXIT_FAILURE );
+    exit(EXIT_FAILURE);
 
   if ( !after ) 
     exit(EXIT_SUCCESS);
