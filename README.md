@@ -35,7 +35,7 @@ brew install phook
 
 ## Usage
 
-See [examples](https://github.com/drinchev/phook/master/examples).
+See [examples](https://github.com/drinchev/phook/tree/master/examples).
 
 ---
 
