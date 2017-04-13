@@ -93,8 +93,12 @@ int main(int argc, char **argv) {
                     perror("process");
                 } else if (end == optarg || *end != '\0') {
                     fprintf(stderr, "process: Invalid argument\n");
-                } else if (p < INT_MIN || p > INT_MAX) {
+                } else if (p < 0) {
+                    fprintf(stderr, "process: Cannot be negative\n");
+                } else if (p > INT_MAX) {
                     fprintf(stderr, "process: Result too large\n");
+                } else if (p == 0) {
+                    fprintf(stderr, "process: Cannot watch pid 0\n");
                 } else {
                     ppid = (pid_t)p;
                     break;
