@@ -45,7 +45,7 @@ Mandatory arguments to long options are mandatory for short options too\n\
   -a, --after=COMMAND        executes command after the parent process has ended\n\
   -e, --execute=COMMAND      executes command on start\n\
   -p, --process=PID          waits for PID to exit instead of parent process\n\
-      --help                 display this help and exit\n\
+  -h, --help                 display this help and exit\n\
       --version              output version information and exit\n\n\
 ");
         copyright();
