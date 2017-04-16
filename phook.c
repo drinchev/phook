@@ -100,7 +100,7 @@ int main(int argc, char **argv) {
                 } else if (p == 0) {
                     fprintf(stderr, "process: Cannot watch pid 0\n");
                 } else {
-                    ppid = (pid_t)p;
+                    ppid = (pid_t) p;
                     break;
                 }
                 usage(EXIT_FAILURE);

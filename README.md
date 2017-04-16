@@ -11,7 +11,8 @@ With no OPTION provided, will do nothing and exit
 Mandatory arguments to long options are mandatory for short options too
   -a, --after=COMMAND        executes command after the parent process has ended
   -e, --execute=COMMAND      executes command on start
-      --help                 display this help and exit
+  -p, --process=PID          waits for PID to exit instead of parent process
+  -h, --help                 display this help and exit
       --version              output version information and exit
 ```
 
@@ -36,6 +37,10 @@ brew install phook
 ## Usage
 
 See [examples](https://github.com/drinchev/phook/tree/master/examples).
+
+## Contributors
+
+- [@jayrhynas](https://github.com/jayrhynas)
 
 ---
 
