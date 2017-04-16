@@ -10,16 +10,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/event.h>
+#include <errno.h>
+#include <limits.h>
 
 #define PROGRAM_NAME "phook"
 #define PROGRAM_VERSION "0.05"
 
 const char *after = NULL;
 
-static struct option const longopts[] = {{"help",    no_argument,       NULL, 0},
+static struct option const longopts[] = {{"help",    no_argument,       NULL, 'h'},
                                          {"version", no_argument,       NULL, 1},
                                          {"after",   required_argument, NULL, 'a'},
                                          {"execute", required_argument, NULL, 'e'},
+                                         {"process", required_argument, NULL, 'p'},
                                          {NULL, 0,                      NULL, 0}};
 
 void copyright() {
@@ -41,7 +44,8 @@ void usage(int status) {
 Mandatory arguments to long options are mandatory for short options too\n\
   -a, --after=COMMAND        executes command after the parent process has ended\n\
   -e, --execute=COMMAND      executes command on start\n\
-      --help                 display this help and exit\n\
+  -p, --process=PID          waits for PID to exit instead of parent process\n\
+  -h, --help                 display this help and exit\n\
       --version              output version information and exit\n\n\
 ");
         copyright();
@@ -74,7 +78,7 @@ int main(int argc, char **argv) {
 
     signal(SIGINT, sigint_handler);
 
-    while ((optc = getopt_long(argc, argv, "a:e:", longopts, NULL)) != -1) {
+    while ((optc = getopt_long(argc, argv, "ha:e:p:", longopts, NULL)) != -1) {
         switch (optc) {
             case 'a':
                 after = optarg;
@@ -82,7 +86,27 @@ int main(int argc, char **argv) {
             case 'e':
                 execute = optarg;
                 break;
-            case 0:
+            case 'p': {
+                char *end;
+                long p = strtol(optarg, &end, 10);
+                if (errno != 0) {
+                    perror("process");
+                } else if (end == optarg || *end != '\0') {
+                    fprintf(stderr, "process: Invalid argument\n");
+                } else if (p < 0) {
+                    fprintf(stderr, "process: Cannot be negative\n");
+                } else if (p > INT_MAX) {
+                    fprintf(stderr, "process: Result too large\n");
+                } else if (p == 0) {
+                    fprintf(stderr, "process: Cannot watch pid 0\n");
+                } else {
+                    ppid = (pid_t)p;
+                    break;
+                }
+                usage(EXIT_FAILURE);
+                break;
+            }
+            case 'h':
                 usage(EXIT_SUCCESS);
                 break;
             case 1:
@@ -102,7 +126,9 @@ int main(int argc, char **argv) {
     if (!after)
         exit(EXIT_SUCCESS);
 
-    ppid = getppid();
+    if (ppid == 0)
+        ppid = getppid();
+
     fpid = fork();
 
     if (fpid != 0)
