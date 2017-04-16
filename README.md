@@ -21,9 +21,9 @@ Mandatory arguments to long options are mandatory for short options too
 You need macOS for this to work.
 
 ```
-wget https://github.com/drinchev/phook/archive/v0.0.5.tar.gz
-tar -xzf v0.0.5.tar.gz
-cd phook-0.0.5
+wget https://github.com/drinchev/phook/archive/v0.0.6.tar.gz
+tar -xzf v0.0.6.tar.gz
+cd phook-0.0.6
 make install
 ```
 
@@ -41,6 +41,7 @@ See [examples](https://github.com/drinchev/phook/tree/master/examples).
 ## Contributors
 
 - [@jayrhynas](https://github.com/jayrhynas)
+- [@shishirchawla](https://github.com/shishirchawla)
 
 ---
 
