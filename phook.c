@@ -77,6 +77,7 @@ int main(int argc, char **argv) {
     struct timespec timeout;
 
     signal(SIGINT, sigint_handler);
+    signal(SIGPIPE, sigint_handler);
 
     while ((optc = getopt_long(argc, argv, "ha:e:p:", longopts, NULL)) != -1) {
         switch (optc) {
