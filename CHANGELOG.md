@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.7
+
+- Compiler optimization is removed, since it creates broken binary with clang
+
 ## 0.0.6
 
 - Added `process` argument for waiting on non-parent processes [@jayrhynas](https://github.com/jayrhynas)

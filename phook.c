@@ -14,7 +14,7 @@
 #include <limits.h>
 
 #define PROGRAM_NAME "phook"
-#define PROGRAM_VERSION "0.06"
+#define PROGRAM_VERSION "0.07"
 
 const char *after = NULL;
 
