@@ -70,7 +70,7 @@ int main(int argc, char **argv) {
     int acode = 0;
     int ecode = 0;
     int optc;
-    pid_t ppid, fpid;
+    pid_t ppid = 0, fpid;
     struct kevent kev;
     int kq;
     int kret;
