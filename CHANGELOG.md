@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.8
+
+- Fix for macOS Monterey. [@martinlau](https://github.com/martinlau)
+
 ## 0.0.7
 
 - Compiler optimization is removed, since it creates broken binary with clang
